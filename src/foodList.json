@@ -1,0 +1,68 @@
+{
+  "foodList": [
+    {
+      "name": "Суп лапшичка",
+      "providerTitle": "Алтай",
+      "provider": "altai",
+      "foodType": "main",
+      "price": 100,
+      "img": "food/potato.png"
+    },
+    {
+      "name": "Суп",
+      "providerTitle": "Алтай",
+      "provider": "altai",
+      "foodType": "main",
+      "price": 120,
+      "img": "food/potato.png"
+    },
+    {
+      "name": "Котлета",
+      "providerTitle": "Алтай",
+      "provider": "altai",
+      "foodType": "main",
+      "price": 140,
+      "img": "food/potato.png"
+    },
+    {
+      "name": "Картошка",
+      "providerTitle": "Нямка",
+      "provider": "nyamka",
+      "foodType": "main",
+      "price": 100,
+      "img": "food/potato.png"
+    },
+    {
+      "name": "Гуляш",
+      "providerTitle": "Макав",
+      "provider": "macaw",
+      "foodType": "main",
+      "price": 200,
+      "img": "food/potato.png"
+    },
+    {
+      "name": "Говно на палке",
+      "providerTitle": "Нямка",
+      "provider": "nyamka",
+      "foodType": "main",
+      "price": 10,
+      "img": "food/potato.png"
+    },
+    {
+      "name": "Салад Цезарь",
+      "providerTitle": "Макав",
+      "provider": "macaw",
+      "foodType": "salad",
+      "price": 190,
+      "img": "food/potato.png"
+    },
+    {
+      "name": "Наггетсы",
+      "providerTitle": "Алтай",
+      "provider": "altai",
+      "foodType": "side",
+      "price": 200,
+      "img": "food/potato.png"
+    }
+  ]
+}
