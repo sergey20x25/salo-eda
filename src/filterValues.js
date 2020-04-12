@@ -2,7 +2,7 @@ export const foodTypeFilters = {
   name: 'foodType',
   title: 'Тип блюда',
   values: {
-    main: 'Главные блюда',
+    main: 'Главные',
     side: 'Закуски',
     salad: 'Салаты',
   },

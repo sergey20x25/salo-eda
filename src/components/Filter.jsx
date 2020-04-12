@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -7,7 +8,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { actions } from '../slices';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+  },
+  legend: {
+    paddingTop: '1.5rem',
+    paddingBottom: '0.5rem',
+  },
+}));
+
 export const Filter = ({ name, title, values }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,8 +38,8 @@ export const Filter = ({ name, title, values }) => {
   };
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">{title}</FormLabel>
+    <FormControl component="fieldset" className={classes.root}>
+      <FormLabel component="legend" className={classes.legend}>{title}</FormLabel>
       <FormGroup>
         {Object.keys(values).map((value) => (
           <FormControlLabel
