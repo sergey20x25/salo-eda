@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import omit from '../utils';
+import { omit } from '../utils';
 
 const initialState = {
   byId: {},
