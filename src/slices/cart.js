@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import omit from 'lodash-es/omit';
+import omit from '../utils';
 
 const initialState = {
   byId: {},
@@ -21,7 +21,7 @@ const slice = createSlice({
     editItemAmount(state, { payload: { id, amount } }) {
       if (amount === 0) {
         const newAllIds = state.allIds.filter((itemId) => itemId !== id);
-        const newById = omit(state.byId, id);
+        const newById = omit(id, state.byId);
         state.byId = newById;
         state.allIds = newAllIds;
       } else {
