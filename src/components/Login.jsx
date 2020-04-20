@@ -1,8 +1,9 @@
 import React from 'react';
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -22,7 +23,9 @@ export const Login = ({ handleLogin, handleLogout }) => {
         if (isSignedIn) {
           return (
             <>
-              <Avatar alt={user.displayName} src={user.photoURL} className={classes.avatar} />
+              <Tooltip title={user.displayName}>
+                <Avatar src={user.photoURL} className={classes.avatar} />
+              </Tooltip>
               <Button color="inherit" variant="outlined" onClick={handleLogout}>
                 ВЫЙТИ
               </Button>

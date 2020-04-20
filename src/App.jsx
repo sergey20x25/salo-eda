@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { FirebaseAuthProvider, IfFirebaseAuthedAnd, IfFirebaseUnAuthed } from '@react-firebase/auth';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -17,19 +16,12 @@ import { actions } from './slices';
 import { filteredfoodItemsSelector } from './selectors';
 import { providerFilters, foodTypeFilters } from './filterValues';
 
-const useStyles = makeStyles((theme) => ({
-  main: {
-    // paddingRight: '1rem',
-  },
-}));
-
 const App = () => {
   const { fetchingState } = useSelector((state) => state.foodItems);
   const entities = useSelector(filteredfoodItemsSelector);
   const dispatch = useDispatch();
   const { fetchFoodItems } = actions;
   const url = process.env.REACT_APP_DB_URL;
-  const classes = useStyles();
 
   useEffect(() => {
     dispatch(fetchFoodItems(url));
@@ -62,7 +54,7 @@ const App = () => {
       >
         {() => (
           <Grid container>
-            <Grid container item xs={12} sm={3} direction="column" className={classes.side}>
+            <Grid container item xs={12} sm={3} direction="column">
               <Filter
                 values={providerFilters.values}
                 name={providerFilters.name}
@@ -74,7 +66,7 @@ const App = () => {
                 title={foodTypeFilters.title}
               />
             </Grid>
-            <Grid item xs={12} sm={9} className={classes.main}>
+            <Grid item xs={12} sm={9}>
               {fetchingState === 'pending'
                 ? <CircularProgress />
                 : <FoodList list={entities} />}
