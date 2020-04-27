@@ -13,7 +13,7 @@ export const ModalRoot = () => {
   if (!modalType) {
     return null;
   }
-
+  console.log('modalroot');
   const SpecificModal = MODAL_COMPONENTS[modalType];
   return <SpecificModal {...modalProps} />;
 };

@@ -14,7 +14,7 @@ export const CartIcon = () => {
   const handleClick = () => {
     dispatch(actions.showModal({ modalType: 'CART' }));
   };
-
+  console.log('carticon');
   return (
     <FirebaseAuthConsumer>
       {({ isSignedIn }) => (

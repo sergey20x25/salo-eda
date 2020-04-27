@@ -48,7 +48,7 @@ export const CartModal = () => {
   const handleDecrement = (id, amount) => () => {
     dispatch(actions.editItemAmount({ id, amount: amount - 1 }));
   };
-
+  console.log('cartmodal');
   return (
     <Modal
       className={classes.modal}

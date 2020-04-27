@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 
 export const Navbar = ({ handleLogin, handleLogout }) => {
   const classes = useStyles();
-
+  console.log('navbar');
   return (
     <div className={classes.root}>
       <AppBar position="static" color="secondary">

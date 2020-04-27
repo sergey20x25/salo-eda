@@ -2,42 +2,61 @@ import React from 'react';
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles(() => ({
   avatar: {
     width: '36px',
     height: '36px',
-    marginRight: '1rem',
     marginLeft: '1rem',
+    cursor: 'pointer',
   },
 }));
 
 export const Login = ({ handleLogin, handleLogout }) => {
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  console.log('login');
   return (
     <FirebaseAuthConsumer>
-      {({ isSignedIn, user }) => {
-        if (isSignedIn) {
-          return (
-            <>
-              <Tooltip title={user.displayName}>
-                <Avatar src={user.photoURL} className={classes.avatar} />
-              </Tooltip>
-              <Button color="inherit" variant="outlined" onClick={handleLogout}>
-                ВЫЙТИ
-              </Button>
-            </>
-          );
-        }
-        return (
-          <Button color="inherit" variant="outlined" onClick={handleLogin}>
-            ВОЙТИ
-          </Button>
-        );
-      }}
+      {({ user }) => (
+        <>
+          <Tooltip title={user.displayName} onClick={handleClick}>
+            <Avatar src={user.photoURL} className={classes.avatar} />
+          </Tooltip>
+          <Menu
+            id="auth-menu"
+            anchorEl={anchorEl}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleLogin}>Сменить пользователя</MenuItem>
+            <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+          </Menu>
+        </>
+      )}
     </FirebaseAuthConsumer>
   );
 };

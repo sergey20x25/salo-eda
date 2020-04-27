@@ -32,7 +32,7 @@ const slice = createSlice({
       }
     },
     [fetchFoodItems.fulfilled]: (state, action) => {
-      const { requestId } = action.meta
+      const { requestId } = action.meta;
       if (state.fetchingState === 'pending' && state.currentRequestId === requestId) {
         state.fetchingState = 'idle';
         state.entities = [...action.payload];
@@ -40,7 +40,7 @@ const slice = createSlice({
       }
     },
     [fetchFoodItems.rejected]: (state, action) => {
-      const { requestId } = action.meta
+      const { requestId } = action.meta;
       if (state.fetchingState === 'pending' && state.currentRequestId === requestId) {
         state.fetchingState = 'idle';
         state.error = action.error;

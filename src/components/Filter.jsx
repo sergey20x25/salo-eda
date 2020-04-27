@@ -36,7 +36,7 @@ export const Filter = ({ name, title, values }) => {
     const filterKey = event.target.name;
     dispatch(actions.changeFilter({ name, filterKey }));
   };
-
+  console.log('filter');
   return (
     <FormControl component="fieldset" className={classes.root}>
       <FormLabel component="legend" className={classes.legend}>{title}</FormLabel>
