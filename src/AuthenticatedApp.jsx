@@ -35,9 +35,6 @@ const AuthentificatedApp = ({ handleLogin, handleLogout }) => {
         </Grid>
         <Grid item xs={12} sm={9}>
           <FoodList />
-          {/* {fetchingState === 'pending'
-            ? <CircularProgress />
-            : <FoodList />} */}
         </Grid>
       </Grid>
       <ModalRoot />

@@ -5,16 +5,16 @@ const fetchFoodItems = createAsyncThunk(
   'foodItems/fetchFoodItems',
   async (url) => {
     const response = await axios.get(`${url}/foodItems.json`);
-    const payload = Object.keys(response.data || []).map((key) => ({
-      ...response.data[key],
-      id: key,
-    }));
+    const entries = Object.entries(response.data);
+    const entriesWithId = entries.map(([id, item]) => [id, { ...item, id }]);
+    const payload = Object.fromEntries(entriesWithId);
     return payload;
   },
 );
 
 const initialState = {
-  entities: [],
+  byId: {},
+  allIds: [],
   fetchingState: 'idle',
   currentRequestId: undefined,
   error: null,
@@ -25,25 +25,26 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchFoodItems.pending]: (state, action) => {
+    [fetchFoodItems.pending]: (state, { meta }) => {
       if (state.fetchingState === 'idle') {
         state.fetchingState = 'pending';
-        state.currentRequestId = action.meta.requestId;
+        state.currentRequestId = meta.requestId;
       }
     },
-    [fetchFoodItems.fulfilled]: (state, action) => {
-      const { requestId } = action.meta;
+    [fetchFoodItems.fulfilled]: (state, { meta, payload }) => {
+      const { requestId } = meta;
       if (state.fetchingState === 'pending' && state.currentRequestId === requestId) {
         state.fetchingState = 'idle';
-        state.entities = [...action.payload];
+        state.byId = payload;
+        state.allIds = Object.keys(payload);
         state.currentRequestId = undefined;
       }
     },
-    [fetchFoodItems.rejected]: (state, action) => {
-      const { requestId } = action.meta;
+    [fetchFoodItems.rejected]: (state, { error, meta }) => {
+      const { requestId } = meta;
       if (state.fetchingState === 'pending' && state.currentRequestId === requestId) {
         state.fetchingState = 'idle';
-        state.error = action.error;
+        state.error = error;
         state.currentRequestId = undefined;
       }
     },

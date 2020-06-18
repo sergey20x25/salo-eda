@@ -10,11 +10,11 @@ const slice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart(state, { payload: { id, name, amount } }) {
+    addToCart(state, { payload: { id, amount } }) {
       if (state.byId[id]) {
         state.byId[id].amount += 1;
       } else {
-        state.byId[id] = { id, name, amount };
+        state.byId[id] = { id, amount };
         state.allIds.push(id);
       }
     },

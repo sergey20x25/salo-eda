@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Divider from '@material-ui/core/Divider';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
-import { cartItemsToShowSelector } from '../selectors';
+import { cartItemsToShowSelector, cartTotalPriceSelector } from '../selectors';
 import { actions } from '../slices';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
+    minWidth: '70%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3),
@@ -28,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: theme.spacing(1),
   },
+  divider: {
+    margin: theme.spacing(2, 0),
+  },
 }));
 
 export const CartModal = () => {
@@ -36,6 +41,7 @@ export const CartModal = () => {
   const { modalType } = useSelector((state) => state.modal);
   const isOpen = modalType !== null;
   const cartItems = useSelector(cartItemsToShowSelector);
+  const totalPrice = useSelector(cartTotalPriceSelector);
 
   const handleClose = () => {
     dispatch(actions.hideModal());
@@ -72,6 +78,12 @@ export const CartModal = () => {
             </ButtonGroup>
           </div>
         ))}
+        <Divider className={classes.divider} />
+        <Typography variant="body1">
+          Итого:&nbsp;
+          {totalPrice}
+          &nbsp;Бат
+        </Typography>
         <Button
           variant="outlined"
           className={classes.button}
