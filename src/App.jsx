@@ -30,7 +30,7 @@ const App = () => {
   return (
     <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
       <CssBaseline />
-      {/* <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner />}>
         <IfFirebaseAuthedAnd
           filter={({ user }) => user.email.includes('@aviasales.ru')}
         >
@@ -45,7 +45,7 @@ const App = () => {
         <IfFirebaseUnAuthed>
           <UnauthenticatedApp handleLogin={handleLogin} />
         </IfFirebaseUnAuthed>
-      </Suspense> */}
+      </Suspense>
     </FirebaseAuthProvider>
   );
 };
