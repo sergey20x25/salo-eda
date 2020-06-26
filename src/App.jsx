@@ -15,12 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const App = () => {
   const dispatch = useDispatch();
-  const { clearCart, fetchFoodItems } = actions;
-  const url = process.env.REACT_APP_DB_URL;
-
-  useEffect(() => {
-    dispatch(fetchFoodItems(url));
-  }, []);
+  const { clearCart } = actions;
 
   const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
