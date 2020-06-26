@@ -11,8 +11,6 @@ import { actions } from './slices';
 
 const AuthenticatedApp = React.lazy(() => import('./AuthenticatedApp'));
 
-firebase.initializeApp(firebaseConfig);
-
 const App = () => {
   const dispatch = useDispatch();
   const { clearCart } = actions;
@@ -27,25 +25,27 @@ const App = () => {
     dispatch(clearCart());
     firebase.auth().signOut();
   };
+
   console.log('app');
   return (
     <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
       <CssBaseline />
-      <Suspense fallback={<Spinner />}>
-        <IfFirebaseUnAuthed>
-          <UnauthenticatedApp handleLogin={handleLogin} />
-        </IfFirebaseUnAuthed>
-        <IfFirebaseAuthedAnd
-          filter={({ user }) => !user.email.includes('@aviasales.ru')}
-        >
-          <UnauthenticatedApp handleLogin={handleLogin} />
-        </IfFirebaseAuthedAnd>
+      {/* <Suspense fallback={<Spinner />}>
         <IfFirebaseAuthedAnd
           filter={({ user }) => user.email.includes('@aviasales.ru')}
         >
           <AuthenticatedApp handleLogin={handleLogin} handleLogout={handleLogout} />
         </IfFirebaseAuthedAnd>
-      </Suspense>
+
+        <IfFirebaseAuthedAnd
+          filter={({ user }) => !user.email.includes('@aviasales.ru')}
+        >
+          <UnauthenticatedApp handleLogin={handleLogin} />
+        </IfFirebaseAuthedAnd>
+        <IfFirebaseUnAuthed>
+          <UnauthenticatedApp handleLogin={handleLogin} />
+        </IfFirebaseUnAuthed>
+      </Suspense> */}
     </FirebaseAuthProvider>
   );
 };
