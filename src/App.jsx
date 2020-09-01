@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -9,13 +9,13 @@ import { UnauthenticatedApp } from './UnauthenticatedApp';
 import { firebaseConfig } from './firebaseConfig';
 import { actions } from './slices';
 
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
 const AuthenticatedApp = React.lazy(() => import('./AuthenticatedApp'));
 
 const App = () => {
   const dispatch = useDispatch();
   const { clearCart } = actions;
-
-  const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
   const handleLogin = () => {
     firebase.auth().signInWithPopup(googleAuthProvider);
