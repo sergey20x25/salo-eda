@@ -1,10 +1,10 @@
-import React from 'react';
-import { FirebaseAuthConsumer } from '@react-firebase/auth';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
+import { AuthContext } from '../context/AuthContext';
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -28,35 +28,33 @@ export const Login = ({ handleLogin, handleLogout }) => {
     setAnchorEl(null);
   };
 
+  const currentUser = useContext(AuthContext);
+
   console.log('login');
   return (
-    <FirebaseAuthConsumer>
-      {({ user }) => (
-        <>
-          <Tooltip title={user.displayName} onClick={handleClick}>
-            <Avatar src={user.photoURL} className={classes.avatar} />
-          </Tooltip>
-          <Menu
-            id="auth-menu"
-            anchorEl={anchorEl}
-            getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleLogin}>Сменить пользователя</MenuItem>
-            <MenuItem onClick={handleLogout}>Выйти</MenuItem>
-          </Menu>
-        </>
-      )}
-    </FirebaseAuthConsumer>
+    <>
+      <Tooltip title={currentUser.displayName} onClick={handleClick}>
+        <Avatar src={currentUser.photoURL} className={classes.avatar} />
+      </Tooltip>
+      <Menu
+        id="auth-menu"
+        anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleLogin}>Сменить пользователя</MenuItem>
+        <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+      </Menu>
+    </>
   );
 };

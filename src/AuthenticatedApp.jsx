@@ -11,10 +11,9 @@ import { providerFilters, foodTypeFilters } from './filterValues';
 const AuthentificatedApp = ({ handleLogin, handleLogout }) => {
   const dispatch = useDispatch();
   const { fetchFoodItems } = actions;
-  const url = process.env.REACT_APP_DB_URL;
 
   useEffect(() => {
-    dispatch(fetchFoodItems(url));
+    dispatch(fetchFoodItems());
   }, []);
 
   return (

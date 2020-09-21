@@ -1,13 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import firebaseApp from '../firebase';
+
+const db = firebaseApp.firestore();
 
 const fetchFoodItems = createAsyncThunk(
   'foodItems/fetchFoodItems',
-  async (url) => {
-    const response = await axios.get(`${url}/foodItems.json`);
-    const entries = Object.entries(response.data);
-    const entriesWithId = entries.map(([id, item]) => [id, { ...item, id }]);
-    const payload = Object.fromEntries(entriesWithId);
+  async () => {
+    const entries = [];
+    const snapshot = await db.collection('foodItems').get();
+    snapshot.forEach((doc) => {
+      entries.push([doc.id, { ...doc.data(), id: doc.id }]);
+    });
+    const payload = Object.fromEntries(entries);
     return payload;
   },
 );

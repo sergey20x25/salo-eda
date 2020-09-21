@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FirebaseAuthConsumer } from '@react-firebase/auth';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { AuthContext } from '../context/AuthContext';
 import { cartCounterSelector } from '../selectors';
 import { actions } from '../slices/modal';
 
@@ -14,18 +14,22 @@ export const CartIcon = () => {
   const handleClick = () => {
     dispatch(actions.showModal({ modalType: 'CART' }));
   };
+
+  const currentUser = useContext(AuthContext);
+
   console.log('carticon');
+
   return (
-    <FirebaseAuthConsumer>
-      {({ isSignedIn }) => (
-        isSignedIn ? (
+    <>
+      {currentUser
+        ? (
           <IconButton color="inherit" onClick={handleClick}>
             <Badge badgeContent={cartCounter}>
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
-        ) : null
-      )}
-    </FirebaseAuthConsumer>
+        )
+        : null}
+    </>
   );
 };
