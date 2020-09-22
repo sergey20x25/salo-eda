@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useUser } from 'reactfire';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
-import { AuthContext } from '../context/AuthContext';
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -28,7 +28,7 @@ export const Login = ({ handleLogin, handleLogout }) => {
     setAnchorEl(null);
   };
 
-  const currentUser = useContext(AuthContext);
+  const currentUser = useUser();
 
   console.log('login');
   return (

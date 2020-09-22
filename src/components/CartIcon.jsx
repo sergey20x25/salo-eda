@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useUser } from 'reactfire';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { AuthContext } from '../context/AuthContext';
 import { cartCounterSelector } from '../selectors';
 import { actions } from '../slices/modal';
 
@@ -15,7 +15,7 @@ export const CartIcon = () => {
     dispatch(actions.showModal({ modalType: 'CART' }));
   };
 
-  const currentUser = useContext(AuthContext);
+  const currentUser = useUser();
 
   console.log('carticon');
 

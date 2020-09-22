@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import firebaseApp from '../firebase';
+import { firebaseApp } from '../firebase';
 
 const db = firebaseApp.firestore();
 
